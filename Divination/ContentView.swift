@@ -6,7 +6,7 @@
 //
 import SwiftUI
 
-struct YearMonthDay: Hashable {
+struct YearMonthDay: Hashable,Codable {
     var year: Int
     var month: Int
     var day: Int
