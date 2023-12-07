@@ -23,23 +23,42 @@ struct DivinationApp: View {
     @Binding var today: YearMonthDay
     @State   var text = ""
     @State   var Divinationname = ""
+    @State   var Divinationcapital = ""
     @State   var logo = ""
+    @State   var Divinationbrief = ""
+    @State   var Divinationhas_coast_line : Int = 0
+    
     var body: some View {
         
         let imageUrl = URL(string: logo)
-
+        
         VStack {
+            Image(decorative: "kamisama")
+                        .resizable()
+                        .scaledToFit()      // 縦横比を維持しながらフレームに収める
+                        .frame(width: 300, height: 150)
             Text("診断結果じゃ")
-                .font(.title)
+                .font(.largeTitle)
+                .foregroundColor(.purple)
                 .padding()
             Text(text)
-           Text(Divinationname)
+            Text(Divinationname)
+                .padding(10)
+            Text(Divinationcapital)
+                .padding(10)
+            Text(Divinationbrief)
+                .padding(10)
+            if Divinationhas_coast_line == 0{
+                Text("海岸線あり！")
+            }else{
+                Text("海岸線はない")
+            }
             AsyncImage(url: imageUrl) { image in
-                        image.resizable()
-                    } placeholder: {
-                        ProgressView()
-                    }
-                    .frame(width: 240, height: 126)
+                image.resizable()
+            } placeholder: {
+                ProgressView()
+            }
+            .frame(width: 240, height: 126)
         }
         .task{
             let text = await getFortune()
@@ -93,13 +112,15 @@ struct DivinationApp: View {
                 if let json = try JSONSerialization.jsonObject(with: data) as? [String: Any] {
                     // Now you can work with the JSON object if needed
                     Divinationname = json["name"] as! String
+                    Divinationcapital = json["capital"] as! String
                     logo = json["logo_url"] as! String
-                    print(json["name"])
+                    Divinationbrief = json["brief"] as! String
+                    Divinationhas_coast_line = json["has_coast_line"] as! Int
                     print(json)
                     // Assuming there's a key named "fortune" in the JSON response
                     if let fortune = json["fortune"] as? String {
                         return fortune
-                    } else {
+                    }else {
                         return ""  // Handle the case when the "fortune" key is not present in the response
                     }
                 } else {

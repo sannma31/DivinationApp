@@ -21,13 +21,14 @@ struct ContentView: View {
     var body: some View {
         NavigationView{
             VStack(spacing: 20) {
-                Text("名前を入力してね")
-                    .font(.headline)
+                Text("相性の良い都道府県は")
+                    .font(.largeTitle)
+                    .foregroundColor(.purple)
                 
                 TextField("名前を入力してください", text: $name)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding(10)
-                    .foregroundColor(.gray)
+                    .foregroundColor(.black)
                 
                 Text("誕生日を入力してください")
                     .font(.headline)
@@ -43,8 +44,8 @@ struct ContentView: View {
                 TextField("血液型を入力してください", text: $bloodType)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding(10)
-                    .foregroundColor(.gray)
-                Text("今日の日付: \(today.year)/\(today.month)/\(today.day)")
+                    .foregroundColor(.black)
+                //                Text("今日の日付: \(today.year)/\(today.month)/\(today.day)")
                 
                     .padding()
                     .onAppear {
@@ -61,11 +62,21 @@ struct ContentView: View {
                 NavigationLink(
                     destination: DivinationApp(name: $name, birthday: $birthday, bloodType: $bloodType, today: $today)){
                         Text("診断")
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .background(Color.purple)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
                     }
                 
-                    .buttonStyle(BorderlessButtonStyle()) // Use BorderlessButtonStyle to remove the link appearance
             }
+            .buttonStyle(BorderlessButtonStyle())
+            
+            Spacer()
         }
+        //        .padding()
+        //        .background(Color.black)
+        //        .edgesIgnoringSafeArea(.all)
     }
     
 }
