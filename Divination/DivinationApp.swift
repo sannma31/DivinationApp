@@ -7,7 +7,14 @@
 import SwiftUI
 import Foundation
 
-
+struct PrefectureInfo: Codable {
+    let name: String
+    let capital: String
+    let citizenDay: YearMonthDay
+    let hasCoastLine: Bool
+    let logoURL: String
+    let brief: String
+}
 
 struct DivinationApp: View {
     @Binding var name: String
@@ -15,12 +22,24 @@ struct DivinationApp: View {
     @Binding var bloodType: String
     @Binding var today: YearMonthDay
     @State   var text = ""
+    @State   var Divinationname = ""
+    @State   var logo = ""
     var body: some View {
+        
+        let imageUrl = URL(string: logo)
+
         VStack {
             Text("診断結果じゃ")
                 .font(.title)
                 .padding()
             Text(text)
+           Text(Divinationname)
+            AsyncImage(url: imageUrl) { image in
+                        image.resizable()
+                    } placeholder: {
+                        ProgressView()
+                    }
+                    .frame(width: 240, height: 126)
         }
         .task{
             let text = await getFortune()
@@ -62,25 +81,41 @@ struct DivinationApp: View {
             print("Error creating JSON data: \(error)")
             return ""  // エラーが発生した場合、空の文字列を返すか適切なエラー処理を行う
         }
+        //        open class func jsonObject(with data: Data, options opt: JSONSerialization.ReadingOptions = []) throws -> Any
+        
         
         // URLSessionを使用してリクエストを送信
         do {
             let (data, _) = try await URLSession.shared.data(for: request)
-
-            // レスポンスデータを文字列に変換して返す
-            if let resultString = String(data: data, encoding: .utf8) {
-                return resultString
-            } else {
-                return ""  // 文字列に変換できない場合、空の文字列を返すか適切なエラー処理を行う
+            
+            // Convert the response data to a Foundation object
+            do {
+                if let json = try JSONSerialization.jsonObject(with: data) as? [String: Any] {
+                    // Now you can work with the JSON object if needed
+                    Divinationname = json["name"] as! String
+                    logo = json["logo_url"] as! String
+                    print(json["name"])
+                    print(json)
+                    // Assuming there's a key named "fortune" in the JSON response
+                    if let fortune = json["fortune"] as? String {
+                        return fortune
+                    } else {
+                        return ""  // Handle the case when the "fortune" key is not present in the response
+                    }
+                } else {
+                    return ""  // Handle the case when JSONSerialization.jsonObject throws an error or the conversion is not successful
+                }
+            } catch {
+                print("Error converting response data to JSON: \(error)")
+                return ""  // Handle the error appropriately
             }
         } catch {
             print("Error: \(error)")
-            return ""  // エラーが発生した場合、空の文字列を返すか適切なエラー処理を行う
+            return ""  // Handle the error appropriately
         }
     }
-
-    
 }
+
 
 @main
 struct DivinationAppMain: App {
