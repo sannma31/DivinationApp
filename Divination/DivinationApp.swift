@@ -34,34 +34,33 @@ struct DivinationApp: View {
         
         VStack {
             Image(decorative: "kamisama")
-                        .resizable()
-                        .scaledToFit()      // 縦横比を維持しながらフレームに収める
-                        .frame(width: 300, height: 150)
+                .resizable()
+                .scaledToFit()      // 縦横比を維持しながらフレームに収める
+                .frame(width: 300, height: 150)
             Text("占い結果じゃ")
                 .font(.largeTitle)
                 .foregroundColor(.purple)
                 .padding()
-
-            Text(text)
-                .font(.title)
-                .foregroundColor(.black)
-                .padding(10)
-
+            
+            
             Text(Divinationname)
-                .font(.title2)
                 .foregroundColor(.black)
                 .padding(10)
-
+                .font(.headline)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+            
             Text(Divinationcapital)
-                .font(.body)
                 .foregroundColor(.black)
                 .padding(10)
-
+                .font(.headline)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+            
             Text(Divinationbrief)
-                .font(.body)
                 .foregroundColor(.black)
                 .padding(10)
-
+                .font(.headline)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+            
             if Divinationhas_coast_line == 0 {
                 Text("海岸線あり！")
                     .font(.callout)
