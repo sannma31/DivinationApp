@@ -20,30 +20,40 @@ struct ContentView: View {
     
     var body: some View {
         NavigationView{
-            VStack(spacing: 20) {
+            VStack(spacing: 10) {
                 Text("相性の良い都道府県は")
                     .font(.largeTitle)
                     .foregroundColor(.purple)
+                    .padding(10)
+                Text("名前を入力してください")
+                    .font(.headline)
+                    .padding(10)
                 
                 TextField("名前を入力してください", text: $name)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding(10)
+                    .padding(5)
+                    .frame(width: 200, height: 50)
                     .foregroundColor(.black)
                 
                 Text("誕生日を入力してください")
                     .font(.headline)
                 
+                
                 DatePicker("", selection: $birthday.date, displayedComponents: .date)
-                    .datePickerStyle(DefaultDatePickerStyle())
+                    .datePickerStyle(WheelDatePickerStyle())
                     .labelsHidden()
                     .padding(10)
+                    .foregroundColor(.primary)
+                    .accentColor(.blue)
+
                 
                 Text("血液型を入力してください")
                     .font(.headline)
                 
                 TextField("血液型を入力してください", text: $bloodType)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding(10)
+                    .frame(width: 200, height: 50)
+                    .padding(5)
                     .foregroundColor(.black)
                 //                Text("今日の日付: \(today.year)/\(today.month)/\(today.day)")
                 
@@ -63,10 +73,11 @@ struct ContentView: View {
                     destination: DivinationApp(name: $name, birthday: $birthday, bloodType: $bloodType, today: $today)){
                         Text("診断")
                             .padding()
-                            .frame(maxWidth: .infinity)
+                            .frame(width: 200, height: 50)
                             .background(Color.purple)
                             .foregroundColor(.white)
                             .cornerRadius(10)
+                        
                     }
                 
             }

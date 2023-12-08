@@ -37,22 +37,39 @@ struct DivinationApp: View {
                         .resizable()
                         .scaledToFit()      // 縦横比を維持しながらフレームに収める
                         .frame(width: 300, height: 150)
-            Text("診断結果じゃ")
+            Text("占い結果じゃ")
                 .font(.largeTitle)
                 .foregroundColor(.purple)
                 .padding()
+
             Text(text)
+                .font(.title)
+                .foregroundColor(.black)
+                .padding(10)
+
             Text(Divinationname)
-                
+                .font(.title2)
+                .foregroundColor(.black)
                 .padding(10)
+
             Text(Divinationcapital)
+                .font(.body)
+                .foregroundColor(.black)
                 .padding(10)
+
             Text(Divinationbrief)
+                .font(.body)
+                .foregroundColor(.black)
                 .padding(10)
-            if Divinationhas_coast_line == 0{
+
+            if Divinationhas_coast_line == 0 {
                 Text("海岸線あり！")
-            }else{
+                    .font(.callout)
+                    .foregroundColor(.blue)
+            } else {
                 Text("海岸線はない")
+                    .font(.callout)
+                    .foregroundColor(.blue)
             }
             AsyncImage(url: imageUrl) { image in
                 image.resizable()
@@ -107,7 +124,6 @@ struct DivinationApp: View {
         // URLSessionを使用してリクエストを送信
         do {
             let (data, _) = try await URLSession.shared.data(for: request)
-            print(data)
             // Convert the response data to a Foundation object
             do {
                 if let json = try JSONSerialization.jsonObject(with: data) as? [String: Any] {
