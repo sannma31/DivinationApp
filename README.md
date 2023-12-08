@@ -2,7 +2,7 @@
 
 ## 概要
 
-「あなたと相性の良い都道府県アプリ」は、株式会社ゆめみが iOS エンジニアを希望する未経験者向けのコードチェック課題の一環として提供されています。このアプリは、ユーザーが名前、誕生日、血液型を入力することで、特定の API にアクセスし、都道府県に関する情報を取得して表示します。
+このアプリは、ユーザーが名前、誕生日、血液型を入力することで、特定の API にアクセスし、都道府県に関する情報を取得して表示します。
 
 ## 使用技術
 
@@ -46,6 +46,73 @@
 - API から受け取ったデータを表示する画面
 - 画像データを非同期で取得して表示
 ```swift
-
+func getFortune() async -> String {
+        // APIのエンドポイント
+        let url = URL(string: "https://yumemi-ios-junior-engineer-codecheck.app.swift.cloud/my_fortune")!
+        
+        // リクエストデータ
+        let requestData: [String: Any] = [
+            "name": name,
+            "birthday": [
+                "year": birthday.year,
+                "month": birthday.month,
+                "day": birthday.day
+            ],
+            "blood_type": bloodType.lowercased(),
+            "today": [
+                "year": today.year,
+                "month": today.month,
+                "day": today.day
+            ]
+        ]
+        
+        // ヘッダー
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue("v1", forHTTPHeaderField: "API-Version")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        // リクエストデータをJSONに変換
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: requestData)
+            request.httpBody = jsonData
+        } catch {
+            print("Error creating JSON data: \(error)")
+            return ""  // エラーが発生した場合、空の文字列を返すか適切なエラー処理を行う
+        }
+        //        open class func jsonObject(with data: Data, options opt: JSONSerialization.ReadingOptions = []) throws -> Any
+        
+        
+        // URLSessionを使用してリクエストを送信
+        do {
+            let (data, _) = try await URLSession.shared.data(for: request)
+            // Convert the response data to a Foundation object
+            do {
+                if let json = try JSONSerialization.jsonObject(with: data) as? [String: Any] {
+                    // Now you can work with the JSON object if needed
+                    Divinationname = json["name"] as! String
+                    Divinationcapital = json["capital"] as! String
+                    logo = json["logo_url"] as! String
+                    Divinationbrief = json["brief"] as! String
+                    Divinationhas_coast_line = json["has_coast_line"] as! Int
+                    print(json)
+                    // Assuming there's a key named "fortune" in the JSON response
+                    if let fortune = json["fortune"] as? String {
+                        return fortune
+                    }else {
+                        return ""  // Handle the case when the "fortune" key is not present in the response
+                    }
+                } else {
+                    return ""  // Handle the case when JSONSerialization.jsonObject throws an error or the conversion is not successful
+                }
+            } catch {
+                print("Error converting response data to JSON: \(error)")
+                return ""  // Handle the error appropriately
+            }
+        } catch {
+            print("Error: \(error)")
+            return ""  // Handle the error appropriately
+        }
+    }
 ```
 
