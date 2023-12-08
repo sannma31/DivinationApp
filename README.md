@@ -10,7 +10,6 @@
 
 ## API 仕様
 
-- Base URL: "https://yumemi-ios-junior-engineer-codecheck.app.swift.cloud"
 - End Point: "/my_fortune"
 - HTTP Method: "POST"
 - HTTP Request Headers:
@@ -45,8 +44,8 @@
 
 - API から受け取ったデータを表示する画面
 - 画像データを非同期で取得して表示
+### APIにリクエスト
 ```swift
-func getFortune() async -> String {
         // APIのエンドポイント
         let url = URL(string: "https://yumemi-ios-junior-engineer-codecheck.app.swift.cloud/my_fortune")!
         
@@ -71,7 +70,9 @@ func getFortune() async -> String {
         request.httpMethod = "POST"
         request.addValue("v1", forHTTPHeaderField: "API-Version")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        
+```
+### リクエストデータをJSONに変換
+```swift
         // リクエストデータをJSONに変換
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: requestData)
@@ -80,8 +81,9 @@ func getFortune() async -> String {
             print("Error creating JSON data: \(error)")
             return ""  // エラーが発生した場合、空の文字列を返すか適切なエラー処理を行う
         }
-        //        open class func jsonObject(with data: Data, options opt: JSONSerialization.ReadingOptions = []) throws -> Any
-        
+```
+### リクエストの送信
+```swift 
         
         // URLSessionを使用してリクエストを送信
         do {
