@@ -29,10 +29,10 @@
   - "birthday": YearMonthDay - 占う人の生年月日
   - "blood_type": String - 占う人の血液型
   - "today": YearMonthDay - 今日の日付
-    - YearMonthDay 型の仕様:
-      - "year": Int - 年
-      - "month": Int - 月
-      - "day": Int - 日
+  - YearMonthDay 型の仕様:
+  - "year": Int - 年
+  - "month": Int - 月
+  - "day": Int - 日
 - Response Body:
   - "name": String - 都道府県の名前
   - "capital": String - 県庁所在地
