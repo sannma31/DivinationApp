@@ -33,7 +33,7 @@ struct ContentView: View {
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding(5)
                     .frame(width: 200, height: 50)
-                    .foregroundColor(.black)
+                    .foregroundColor(Color("ThemaColor"))
                 
                 Text("誕生日を入力してください")
                     .font(.headline)
@@ -43,7 +43,7 @@ struct ContentView: View {
                     .datePickerStyle(WheelDatePickerStyle())
                     .labelsHidden()
                     .padding(10)
-                    .foregroundColor(.primary)
+                    .foregroundColor(Color("ThemaColor"))
                     .accentColor(.blue)
 
                 
@@ -54,9 +54,7 @@ struct ContentView: View {
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .frame(width: 200, height: 50)
                     .padding(5)
-                    .foregroundColor(.black)
-                //                Text("今日の日付: \(today.year)/\(today.month)/\(today.day)")
-                
+                    .foregroundColor(Color("ThemaColor"))
                     .padding()
                     .onAppear {
                         // 今日の日付を取得して設定
@@ -75,7 +73,7 @@ struct ContentView: View {
                             .padding()
                             .frame(width: 200, height: 50)
                             .background(Color.purple)
-                            .foregroundColor(.white)
+                            .foregroundColor(Color("ThemaColor"))
                             .cornerRadius(10)
                         
                     }
@@ -85,6 +83,7 @@ struct ContentView: View {
             
             Spacer()
         }
+//        .environment(\.colorScheme, .dark)
         //        .padding()
         //        .background(Color.black)
         //        .edgesIgnoringSafeArea(.all)

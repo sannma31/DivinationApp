@@ -42,21 +42,20 @@ struct DivinationApp: View {
                 .foregroundColor(.purple)
                 .padding()
             
-            
             Text(Divinationname)
-                .foregroundColor(.black)
+                .foregroundColor(Color("ThemaColor"))
                 .padding(10)
                 .font(.headline)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
             
             Text(Divinationcapital)
-                .foregroundColor(.black)
+                .foregroundColor(Color("ThemaColor"))
                 .padding(10)
                 .font(.headline)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
             
             Text(Divinationbrief)
-                .foregroundColor(.black)
+                .foregroundColor(Color("ThemaColor"))
                 .padding(10)
                 .font(.headline)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
