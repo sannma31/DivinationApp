@@ -43,6 +43,7 @@ struct DivinationApp: View {
                 .padding()
             Text(text)
             Text(Divinationname)
+                
                 .padding(10)
             Text(Divinationcapital)
                 .padding(10)
@@ -106,7 +107,7 @@ struct DivinationApp: View {
         // URLSessionを使用してリクエストを送信
         do {
             let (data, _) = try await URLSession.shared.data(for: request)
-            
+            print(data)
             // Convert the response data to a Foundation object
             do {
                 if let json = try JSONSerialization.jsonObject(with: data) as? [String: Any] {
