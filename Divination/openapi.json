@@ -1,0 +1,212 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "ios-junior-engineer-codecheck-backend",
+    "version": "1.0.1"
+  },
+  "servers": [
+    {
+      "url": "https://yumemi-ios-junior-engineer-codecheck.app.swift.cloud"
+    }
+  ],
+  "paths": {
+    "/my_fortune": {
+      "post": {
+        "operationId": "post-my-fortune",
+        "tags": [
+          "Fortune"
+        ],
+        "summary": "Get fortune for given person",
+        "description": "This endpoint returns the fortune of a person based on their name, birthday, and blood type, as well as the current date.",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "API-Version",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "v1"
+              ]
+            },
+            "required": false,
+            "example": "v1",
+            "description": "API version you'd like to use in your sending request. Currently only `v1` available. If you don't attach this parameter in your header, system will use the latest API version."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MyFortuneRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MyFortuneResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-code-samples": [
+        {
+          "lang": "shell",
+          "source": "curl -X POST \"https://yumemi-ios-junior-engineer-codecheck.app.swift.cloud/my_fortune\" \\\n  -H \"API-Version: v1\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"name\": \"ゆめみん\", \"birthday\": {\"year\": 2000, \"month\": 1, \"day\": 27}, \"blood_type\": \"ab\", \"today\": {\"year\": 2023, \"month\": 5, \"day\": 5}}'\n"
+        }
+      ]
+    }
+  },
+  "components": {
+    "schemas": {
+      "MyFortuneRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 127,
+            "description": "Target's name.",
+            "example": "ゆめみん"
+          },
+          "birthday": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/YearMonthDay"
+              },
+              {
+                "description": "Target's birthday."
+              }
+            ]
+          },
+          "blood_type": {
+            "type": "string",
+            "enum": [
+              "a",
+              "b",
+              "ab",
+              "o"
+            ],
+            "description": "Target's blood type.",
+            "example": "ab"
+          },
+          "today": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/YearMonthDay"
+              },
+              {
+                "description": "Today's date."
+              }
+            ]
+          }
+        },
+        "required": [
+          "name",
+          "birthday",
+          "blood_type",
+          "today"
+        ]
+      },
+      "MyFortuneResponse": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Result prefecture's name.",
+            "example": "富山県"
+          },
+          "brief": {
+            "type": "string",
+            "description": "Result prefecture's brief instruction.",
+            "example": "富山県（とやまけん）は、日本の中部地方に位置する県。県庁所在地は富山市。\n中部地方の日本海側、新潟県を含めた場合の北陸地方のほぼ中央にある。\n※出典: フリー百科事典『ウィキペディア（Wikipedia）』"
+          },
+          "capital": {
+            "type": "string",
+            "description": "Result prefecture's capital city.",
+            "example": "富山市"
+          },
+          "citizen_day": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MonthDay"
+              },
+              {
+                "description": "Result prefecture's citizen date (if it has one)."
+              }
+            ]
+          },
+          "has_coast_line": {
+            "type": "boolean",
+            "description": "Whether result prefecture has a coast line or not.",
+            "example": true
+          },
+          "logo_url": {
+            "type": "string",
+            "format": "url",
+            "description": "Result prefecture's logo's URL.",
+            "example": "https://japan-map.com/wp-content/uploads/toyama.png"
+          }
+        },
+        "required": [
+          "name",
+          "brief",
+          "capital",
+          "has_coast_line",
+          "logo_url"
+        ]
+      },
+      "YearMonthDay": {
+        "type": "object",
+        "properties": {
+          "year": {
+            "type": "integer",
+            "description": "Year number",
+            "example": 2000
+          },
+          "month": {
+            "type": "integer",
+            "description": "Month number",
+            "example": 1
+          },
+          "day": {
+            "type": "integer",
+            "description": "Day number",
+            "example": 27
+          }
+        },
+        "required": [
+          "year",
+          "month",
+          "day"
+        ]
+      },
+      "MonthDay": {
+        "type": "object",
+        "properties": {
+          "month": {
+            "type": "integer",
+            "description": "Month number",
+            "example": 5
+          },
+          "day": {
+            "type": "integer",
+            "description": "Day number",
+            "example": 9
+          }
+        },
+        "required": [
+          "month",
+          "day"
+        ]
+      }
+    }
+  }
+}
