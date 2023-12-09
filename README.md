@@ -1,14 +1,14 @@
 # あなたと相性の良い都道府県アプリ
 
 ## 概要
--株式会社ゆめみ インターン iOS提出課題
+株式会社ゆめみ インターン iOS提出課題
 
 ## 使用技術
 - SwiftUI
 
 ## アプリの使用・動作・説明
 
--このアプリは、ユーザーが名前、誕生日、血液型を入力することで、相性の良い都道府県に関する情報が表示されるアプリです。
+- このアプリは、ユーザーが名前、誕生日、血液型を入力することで、相性の良い都道府県に関する情報が表示されるアプリです。
 <table>
 <tr>
 <td><img src="https://private-user-images.githubusercontent.com/120109331/289011229-8b5b6206-502e-4a86-8ce2-4e801335163a.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTEiLCJleHAiOjE3MDIwMjUzNjIsIm5iZiI6MTcwMjAyNTA2MiwicGF0aCI6Ii8xMjAxMDkzMzEvMjg5MDExMjI5LThiNWI2MjA2LTUwMmUtNGE4Ni04Y2UyLTRlODAxMzM1MTYzYS5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBSVdOSllBWDRDU1ZFSDUzQSUyRjIwMjMxMjA4JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDIzMTIwOFQwODQ0MjJaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT0xYTIxOGZiNGNhODg1YzNjMDQ1ZDE0YTk5ODU4OTllMjI5NjIyZGY0OTg5ZGI5NGE3YTA5MzhlOTI4NGQwYjFmJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZhY3Rvcl9pZD0wJmtleV9pZD0wJnJlcG9faWQ9MCJ9.d9t6mSJjPieJgOPxwvqHWQJIt8ZLntOQVNTDNS6hFIY" width="300"></td>
@@ -18,8 +18,8 @@
 </table>
 
 ## その他
--ダークモード対応
--縦画面固定
+- ダークモード対応
+- 縦画面固定
 
 <table>
 <tr>
