@@ -16,6 +16,7 @@ struct PrefectureInfo: Codable {
     let brief: String
 }
 
+
 struct DivinationApp: View {
     @Binding var name: String
     @Binding var birthday: YearMonthDay
@@ -27,6 +28,7 @@ struct DivinationApp: View {
     @State   var logo = ""
     @State   var Divinationbrief = ""
     @State   var Divinationhas_coast_line : Int = 0
+    @State   var isTextVisible :Bool = false
     
     var body: some View {
         
@@ -43,23 +45,38 @@ struct DivinationApp: View {
                 .padding()
             
             Text(Divinationname)
+                .opacity(isTextVisible ? 1 : 0)
                 .foregroundColor(Color("ThemaColor"))
                 .padding(10)
                 .font(.headline)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
-            
+                .onAppear {
+                    withAnimation(.easeIn(duration: 1.0)) {
+                        isTextVisible = true
+                    }
+                }
             Text(Divinationcapital)
+                .opacity(isTextVisible ? 1 : 0)
                 .foregroundColor(Color("ThemaColor"))
                 .padding(10)
                 .font(.headline)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
-            
+                .onAppear {
+                    withAnimation(.easeIn(duration: 1.0)) {
+                        isTextVisible = true
+                    }
+                }
             Text(Divinationbrief)
+                .opacity(isTextVisible ? 1 : 0)
                 .foregroundColor(Color("ThemaColor"))
                 .padding(10)
                 .font(.headline)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
-            
+                .onAppear {
+                    withAnimation(.easeIn(duration: 1.0)) {
+                        isTextVisible = true
+                    }
+                }
             if Divinationhas_coast_line == 0 {
                 Text("海岸線あり！")
                     .font(.callout)
