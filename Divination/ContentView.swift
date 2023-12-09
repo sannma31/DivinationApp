@@ -45,7 +45,7 @@ struct ContentView: View {
                     .padding(10)
                     .foregroundColor(Color("ThemaColor"))
                     .accentColor(.blue)
-
+                
                 
                 Text("血液型を入力してください")
                     .font(.headline)
@@ -83,10 +83,7 @@ struct ContentView: View {
             
             Spacer()
         }
-//        .environment(\.colorScheme, .dark)
-        //        .padding()
-        //        .background(Color.black)
-        //        .edgesIgnoringSafeArea(.all)
+        //        .environment(\.colorScheme, .dark)
     }
     
 }
